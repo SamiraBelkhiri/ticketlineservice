@@ -56,6 +56,16 @@ class Tickets
      * @ORM\Column(type="string", length=255)
      */
     private $ticketStatus ;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $openTimee;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $closeTimee;
     //'open','close','inProgress','waitingForFeedBack','wontFix' , 'pool'
 
     public function getId(): ?int
@@ -155,6 +165,30 @@ class Tickets
     public function setTicketStatus(string $ticketStatus): self
     {
         $this->ticketStatus = $ticketStatus;
+
+        return $this;
+    }
+
+    public function getOpenTimee(): ?\DateTimeInterface
+    {
+        return $this->openTimee;
+    }
+
+    public function setOpenTimee(\DateTimeInterface $openTimee): self
+    {
+        $this->openTimee = $openTimee;
+
+        return $this;
+    }
+
+    public function getCloseTimee(): ?\DateTimeInterface
+    {
+        return $this->closeTimee;
+    }
+
+    public function setCloseTimee(?\DateTimeInterface $closeTimee): self
+    {
+        $this->closeTimee = $closeTimee;
 
         return $this;
     }
