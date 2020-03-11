@@ -35,6 +35,11 @@ class Comments
      * @ORM\Column(type="string", length=255)
      */
     private $commentStatus;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Tickets", inversedBy="comments")
+     */
+    private $comment;
     //public , private
 
     public function getId(): ?int
@@ -86,6 +91,18 @@ class Comments
     public function setCommentStatus(string $commentStatus): self
     {
         $this->commentStatus = $commentStatus;
+
+        return $this;
+    }
+
+    public function getComment(): ?Tickets
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?Tickets $comment): self
+    {
+        $this->comment = $comment;
 
         return $this;
     }
