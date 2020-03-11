@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class Users implements UserInterface
 {
@@ -21,6 +23,8 @@ class Users implements UserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
+
+    private $plainPassword;
 
     /**
      * @ORM\Column(type="json")
@@ -102,6 +106,22 @@ class Users implements UserInterface
         $this->password = $password;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
     }
 
     /**
