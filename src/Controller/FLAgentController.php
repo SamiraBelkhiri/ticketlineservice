@@ -5,17 +5,15 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class MangerController extends AbstractController
+class FLAgentController extends AbstractController
 {
     /**
-     * @Route("/manger", name="manger")
+     * @Route("/f/l/agent", name="f_l_agent")
      */
     public function index()
     {
-        return $this->render('manger/index.html.twig', [
-            'manager_name' => 'here we are',
+        return $this->render('fl_agent/index.html.twig', [
+            'controller_name' => 'FLAgentController',
         ]);
     }
-
-
 }
