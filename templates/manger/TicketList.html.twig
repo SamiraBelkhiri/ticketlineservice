@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+
+    {% block title %} Ticket list!{% endblock %}
+
+
+{% block body %}
+
+    {%  for ticket in tickets %}
+
+        <h6>title {{ ticket.id }}! ✅</h6>
+
+        ✅</h6><a href="{{ path('ticketdetailes', {'ticket': ticket.id}) }}" >{{  ticket.TicketTitle }}</a>
+
+        <h6>title {{ ticket.TicketTitle }}! ✅</h6>
+
+        <h6>title {{ ticket.ticketStatus }}! ✅</h6>
+
+        <h6>----------------------------</h6>
+
+    {%  endfor %}
+
+{% endblock %}

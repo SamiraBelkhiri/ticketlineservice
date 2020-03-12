@@ -34,7 +34,10 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
         $user->setPassword($newEncodedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
+
     }
+
+
 
     // /**
     //  * @return Users[] Returns an array of Users objects

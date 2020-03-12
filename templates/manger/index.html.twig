@@ -3,27 +3,45 @@
 {% block title %}Hello MangerController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
 
-<div class="example-wrapper">
-    <h1>Welcome {{ manager_name }}! ✅</h1>
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
 
-    <table style="width:100%">
-        <tr>
-            <th>OPEN TICKETS</th>
-            <th>CLOSE TICKETS</th>
-            <th>REOPEN TICKETS</th>
-        </tr>
-        <tr>
-            <td>Jill</td>
-            <td>Smith</td>
-            <td>50</td>
-        </tr>
-    </table>
+    <div class="example-wrapper">
+        <h1>Welcome {{ userManager }}! ✅</h1>
+
+        <table style="width:100%">
+            <tr>
+                <th>OPEN TICKETS</th>
+                <th>CLOSE TICKETS</th>
+                <th>REOPEN TICKETS</th>
+            </tr>
+            <tr>
 
 
-</div>
+                <td>{{ showTicketsOpen }}</td>
+
+                <td>{{ showTicketsClose }}</td>
+
+                <td>{{ showTickets }}</td>
+
+
+            </tr>
+        </table>
+
+        <a href="{{ path('ticketlist') }}">Show Tickets</a>
+
+        <a href="{{ path('AddAgent') }}" >Add Agent</a>
+
+    </div>
 {% endblock %}
