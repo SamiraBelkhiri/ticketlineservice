@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200310142500 extends AbstractMigration
+final class Version20200312142315 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -23,7 +23,7 @@ final class Version20200310142500 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE comments CHANGE date date DATETIME NOT NULL');
-        $this->addSql('ALTER TABLE tickets ADD open_timee DATETIME NOT NULL, ADD close_timee DATETIME DEFAULT NULL');
+        $this->addSql('ALTER TABLE tickets DROP description');
     }
 
     public function down(Schema $schema) : void
@@ -32,6 +32,6 @@ final class Version20200310142500 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE comments CHANGE date date DATETIME NOT NULL');
-        $this->addSql('ALTER TABLE tickets DROP open_timee, DROP close_timee');
+        $this->addSql('ALTER TABLE tickets ADD description VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`');
     }
 }
