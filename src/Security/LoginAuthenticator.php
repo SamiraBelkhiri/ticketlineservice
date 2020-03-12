@@ -98,6 +98,8 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
             return new RedirectResponse($this->urlGenerator->generate('customer'));
         } elseif($user[0]=='ROLE_AGENT') {
             return new RedirectResponse($this -> urlGenerator -> generate('flagent'));
+        } elseif($user[0]=='ROLE_MANAGER') {
+            return new RedirectResponse($this -> urlGenerator -> generate('manger'));
         } elseif($user[0]=='ROLE_ADMIN') {
             return new RedirectResponse($this -> urlGenerator -> generate('home'));
         }
