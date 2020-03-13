@@ -3,54 +3,87 @@
 {% block title %}Hello CustomerController!{% endblock %}
 
 {% block body %}
-<style>
-    body {font-family: Arial, Helvetica, sans-serif;}
-    * {box-sizing: border-box;}
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-    input[type=text], select, textarea {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        margin-top: 6px;
-        margin-bottom: 16px;
-        resize: vertical;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    input[type=submit] {
-        background-color: #4CAF50;
-        color: white;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
+        h1 {
+            text-align: center;
+            color: black;
+        }
 
-    input[type=submit]:hover {
-        background-color: #45a049;
-    }
+        button {
+            background-color: deeppink;
+            color: white;
+            padding: 20px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-    .container {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        padding: 20px;
-    }
-</style>
-<div class="example-wrapper">
-    <h3>Contact Form</h3>
+        input[type=text], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
 
-    <h5>Create a ticket on our site</h5>
-    {{ form_start(createTicket) }}
-    {{ form_row(createTicket.ticketTitle) }}
-    {{ form_row(createTicket.description) }}
-    <button class="btn" name="submit">Send ticket</button>
-    {{ form_end(createTicket) }}
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/ticketlineservice/src/Controller/CustomerController.php'|file_link(0) }}">src/Controller/CustomerController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/ticketlineservice/templates/customer/index.html.twig'|file_link(0) }}">templates/customer/index.html.twig</a></code></li>
-    </ul>
-</div>
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+    </style>
+    <div class="example-wrapper">
+        <h1>Create a ticket on our site</h1>
+        {{ form_start(createTicket) }}
+        {{ form_row(createTicket.ticketTitle) }}
+        {{ form_row(createTicket.description) }}
+        <button type="submit" class="btn" name="submit">Send ticket</button>
+        {{ form_end(createTicket) }}
+
+    </div>
+    <h1 id="openTitle">Open tickets that you have sent</h1>
+    {% for ticket in allTickets %}
+
+        {% if  ticket.ticketStatus  == 'open' %}
+
+            <h3>Ticket ID: {{ ticket.id }}</h3>
+
+            <p><strong>Subject: </strong>{{ ticket.TicketTitle }}</p>
+
+            <p><strong>Status: </strong>{{ ticket.ticketStatus }}</p>
+
+            <p><strong>Description: </strong>{{ ticket.description }}</p>
+
+
+            <h3>Add a comment: <textarea></textarea></h3>
+            <button type="submit" class="btn" name="submit">Send comment</button>
+
+        {% endif %}
+
+    {% endfor %}
+
 {% endblock %}
