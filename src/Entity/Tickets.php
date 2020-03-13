@@ -107,6 +107,7 @@ class Tickets
         return $this;
     }
 
+
     public function getOpenTime(): ?\DateTimeInterface
     {
         return $this->openTime;

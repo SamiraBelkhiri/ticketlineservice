@@ -5,16 +5,15 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HomePageController extends AbstractController
+class CustomerController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/customer", name="customer")
      */
     public function index()
     {
-
-        return $this->render('home_page/index.html.twig', [
-            'controller_name' => 'Welcome to our Ticket Line Service',
+        return $this->render('customer/index.html.twig', [
+            'controller_name' => 'CustomerController',
         ]);
     }
 }

@@ -93,11 +93,18 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-
+        $user = $token->getUser()->getRoles();
+        if($user[0]=='ROLE_USER'){
+            return new RedirectResponse($this->urlGenerator->generate('customer'));
+        } elseif($user[0]=='ROLE_AGENT') {
+            return new RedirectResponse($this -> urlGenerator -> generate('flagent'));
+        } elseif($user[0]=='ROLE_ADMIN') {
+            return new RedirectResponse($this -> urlGenerator -> generate('home'));
+        }
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
         // redirect to some "app_homepage" route - of wherever you want
-        return new RedirectResponse($this->urlGenerator->generate('home'));
+        return new RedirectResponse($this->urlGenerator->generate('login'));
     }
 
     protected function getLoginUrl()

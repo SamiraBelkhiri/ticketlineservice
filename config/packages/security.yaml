@@ -39,6 +39,7 @@ security:
     access_control:
         - { path: ^/manger, roles: ROLE_ADMIN }
         - { path: ^/app_login, roles: ROLE_USER }
+        - { path: ^/flagent, roles: ROLE_AGENT }
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
     role_hierarchy:
