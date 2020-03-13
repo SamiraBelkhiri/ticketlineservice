@@ -40,6 +40,12 @@
 <div class="example-wrapper">
     <h3>Contact Form</h3>
 
+    <h5>Create a ticket on our site</h5>
+    {{ form_start(createTicket) }}
+    {{ form_row(createTicket.ticketTitle) }}
+    {{ form_row(createTicket.description) }}
+    <button class="btn" name="submit">Send ticket</button>
+    {{ form_end(createTicket) }}
 
     This friendly message is coming from:
     <ul>

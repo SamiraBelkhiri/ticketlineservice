@@ -4,8 +4,11 @@ namespace App\Form;
 
 use App\Entity\Tickets;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class CreateTicketType extends AbstractType
 {
@@ -13,17 +16,18 @@ class CreateTicketType extends AbstractType
     {
         $builder
             ->add('ticketTitle')
-            ->add('openTime')
-            ->add('closeTime')
-            ->add('priority')
-            ->add('assignTo')
-            ->add('reOpen')
-            ->add('userId')
-            ->add('ticketStatus')
-            ->add('openTimee')
-            ->add('closeTimee')
-            ->add('user')
-            ->add('description')
+            ->add('description', TextType::class,[
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter some text',
+                    ]),
+                    new Length([
+                        'min' => 25,
+                        'minMessage' => 'Your text should be at least {{ limit }} characters',
+                        'max' => 250,
+                    ]),
+                ]
+            ])
         ;
     }
 
