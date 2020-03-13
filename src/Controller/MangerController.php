@@ -19,54 +19,50 @@ class MangerController extends AbstractController
      */
     public function index()
     {
+        /** @var Users $user */
 
-        $userEmail = $this->getUser()->getUsername();
+        //$userEmail = $this->getUser()->getId();
 
-        $openTickets= $this->getDoctrine()->getRepository(Tickets::class)->findBy(['ticketStatus' => 'open']);
-        $openTickets = count($openTickets);
+        $user = $this->getUser();
 
-        $closedTickets= $this->getDoctrine()->getRepository(Tickets::class)->findBy(['ticketStatus' => 'close']);
-        $closedTickets = count($closedTickets);
+      //  var_dump($user->getLastName());
 
-        $showTickets= $this->getDoctrine()->getRepository(Tickets::class)->findAll();
+        /** @var Tickets $allTickets */
 
-       $open = 0;
-        $close = 0;
-/*
-        for ($i = 0; $i < count($showTickets); $i++) {
+       // var_dump($allTickets->getTicketStatus());
+        $allTickets= $this->getDoctrine()->getRepository(Tickets::class)->findAll();
 
-            if ($showTickets->getTicketStatus() == 'open'){
-                $open++;
-            }
-            if ($showTickets . ticketStatus == 'close') {
-                $close++;
-            }
-        }*/
+      //  $allTickets->
+        //$allTickets->getReOpen();
+        $em = $this->getDoctrine()->getRepository(Tickets::class);
 
-   /*     $userManager = new Users();
-        $userManager->setLastName('last name');*/
+        //var_dump($allTickets->getReOpen());
 
+       $openResult = $em->countValueNambers('open');
+        $closeResult = $em->countValueNambers('closed');
 
         $showTickets = new Tickets();
         $showTickets->setReOpen(20);
 
         return $this->render('manger/index.html.twig', [
             //'manager_name' => $userManeger->getUser()->getUsername(),
-            'userManager' => $userEmail,
+            'userManager' => $user->getLastName(),
             'showTickets' => $showTickets->getReOpen(),
-            'showTicketsClose' => $closedTickets,
-            'showTicketsOpen' => $openTickets,
-            'userID' => 2,
+            'showTicketsClose' => $openResult,
+            'showTicketsOpen' => $closeResult,
+            'reopnTicket'=>$allTickets,
+            'i'=>0
 
         ]);
 
     }
 
+
+
     /**
      * @Route("/manger/TicketList", name="ticketlist")
      */
     public function TicketList (){
-
 
         $tickets = $this->getDoctrine()->getRepository(Tickets::class)->findAll();
 
@@ -74,10 +70,24 @@ class MangerController extends AbstractController
     }
 
    /**
-     * @Route("/manger/AddAgent/{ticket}", name="ticketdetailes")
+     * @Route("/manger/TicketDetailes/{ticket}", name="ticketdetailes")
      */
     public function TicketDetailes (Tickets $ticket){
-        return $this->render('manger/AddAgent.html.twig', array('tickets' => $ticket));
+
+        /** @var Tickets $thisTickets */
+
+
+//        $thisTickets= $this->getDoctrine()->getRepository(Tickets::class)->findOneBy(['id' => $ticket]);
+
+     //   $thisTickets= $this->getDoctrine()->getRepository(Tickets::class)->findOneBy(['assign_to']);
+
+  //      $user = $thisTickets[0];
+
+        //$thisTickets->getAssignTo();
+
+    //    var_dump($thisTickets->getAssignTo());
+
+        return $this->render('manger/TicketDetailes.html.twig', ['ticket' => $ticket]);
     }
 
     /**
@@ -86,6 +96,7 @@ class MangerController extends AbstractController
     public function AddAgent (){
 
         $tickets = $this->getDoctrine()->getRepository(Tickets::class)->find();
+
 
         return $this->render('manger/AddAgent.html.twig', array('tickets' => $tickets));
     }

@@ -19,6 +19,17 @@ class TicketsRepository extends ServiceEntityRepository
         parent::__construct($registry, Tickets::class);
     }
 
+    public function countValueNambers($value)
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.ticketStatus = :val')
+            ->setParameter('val', $value)
+            ->select('count(t.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+    }
+
     // /**
     //  * @return Tickets[] Returns an array of Tickets objects
     //  */

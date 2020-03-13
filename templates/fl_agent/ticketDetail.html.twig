@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+    <h6>Ticket title: {{ ticket.TicketTitle }}</h6>
+
+    <h6>Description: {{ ticket.description }}</h6>
+
+    <h6>Date and Time: {{ ticket.openTimee|date("m-d H:i") }}</h6>
+
+    <h6>Ticket Status: {{ ticket.ticketStatus }}</h6>
+
+    <h6>change status</h6>
+    <input type="text" value="" name="status">
+
+    <h6>add comment</h6>
+    <input type="text" value="" name="comment">
+
+    <button><a href="{{ path('flagent') }}">Go Back</a></button>
+{% endblock %}
