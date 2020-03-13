@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+
+    {% block title %} Ticket Detailes !{% endblock %}
+
+
+{% block body %}
+
+    <h6>title id {{ ticket.id }}! ✅</h6>
+
+    ✅<h6> the title {{ ticket.TicketTitle }}</h6>
+
+    <h6> the problem {{ ticket.description }}</h6>
+
+    <h6> the date {{ ticket.openTime|date("m-d H:i") }}</h6>
+
+    <h6>title status {{ ticket.ticketStatus }}! ✅</h6>
+
+    <h6>change status ✅</h6>
+    <input type="text" value="null" name="status">
+
+    <h6>add comment✅</h6>
+    <input type="text" value="null" name="comment">
+
+    <h6>title status {{ ticket.ticketStatus }}! ✅</h6>
+
+    <button>Done</button>
+
+
+
+{% endblock %}
