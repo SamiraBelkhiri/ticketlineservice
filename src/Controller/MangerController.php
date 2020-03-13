@@ -39,7 +39,7 @@ class MangerController extends AbstractController
         //var_dump($allTickets->getReOpen());
 
        $openResult = $em->countValueNambers('open');
-        $closeResult = $em->countValueNambers('close');
+        $closeResult = $em->countValueNambers('closed');
 
         $showTickets = new Tickets();
         $showTickets->setReOpen(20);
