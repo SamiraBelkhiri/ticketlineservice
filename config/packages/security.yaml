@@ -38,6 +38,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/manger, roles: ROLE_ADMIN }
+        - { path: ^/flagent, roles: ROLE_AGENT }
         - { path: ^/app_login, roles: ROLE_USER }
         - { path: ^/flagent, roles: ROLE_AGENT }
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
