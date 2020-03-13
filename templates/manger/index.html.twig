@@ -29,15 +29,25 @@
             <tr>
 
 
+
+                {% set foo = 0 %}
                 <td>{{ showTicketsOpen }}</td>
 
                 <td>{{ showTicketsClose }}</td>
 
-                <td>{{ showTickets }}</td>
-
+                {% for r in reopnTicket  %}
+                    {% if r.reOpen != 0  %}
+                        <td>{{  ++ r.reOpen }}</td>
+                        {% set foo = r.reOpen %}
+                    {% endif %}
+                {% endfor %}
 
             </tr>
         </table>
+
+        <h3>OPEN TICKETS - CLOSE TICKETS {{ showTicketsOpen /(showTicketsOpen + showTicketsClose) }} %</h3>
+
+        <h3>CLOSE TICKETS - REOPEN TICKETS {{ showTicketsClose/(showTicketsOpen + foo) }} %</h3>
 
         <a href="{{ path('ticketlist') }}">Show Tickets</a>
 

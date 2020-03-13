@@ -20,45 +20,26 @@ class MangerController extends AbstractController
     public function index()
     {
         /** @var Users $user */
-        //$userEmail = $this->getUser()->getUsername();
+
+        //$userEmail = $this->getUser()->getId();
 
         $user = $this->getUser();
-        $user->getId();
-       // $user->getLastName();
+
+      //  var_dump($user->getLastName());
 
         /** @var Tickets $allTickets */
 
-        $allTickets->getTicketStatus();
+       // var_dump($allTickets->getTicketStatus());
+        $allTickets= $this->getDoctrine()->getRepository(Tickets::class)->findAll();
 
+      //  $allTickets->
+        //$allTickets->getReOpen();
+        $em = $this->getDoctrine()->getRepository(Tickets::class);
 
+        //var_dump($allTickets->getReOpen());
 
-
-  /*      $userEmail = $this->getUser()->getId();
-
-        $openTickets= $this->getDoctrine()->getRepository(Tickets::class)->findBy(['ticketStatus' => 'open']);
-        $openTickets = count($openTickets);
-
-        $closedTickets= $this->getDoctrine()->getRepository(Tickets::class)->findBy(['ticketStatus' => 'close']);
-        $closedTickets = count($closedTickets);
-
-        $showTickets= $this->getDoctrine()->getRepository(Tickets::class)->findAll();*/
-
-       $open = 0;
-        $close = 0;
-/*
-        for ($i = 0; $i < count($showTickets); $i++) {
-
-            if ($showTickets->getTicketStatus() == 'open'){
-                $open++;
-            }
-            if ($showTickets . ticketStatus == 'close') {
-                $close++;
-            }
-        }*/
-
-   /*     $userManager = new Users();
-        $userManager->setLastName('last name');*/
-
+       $openResult = $em->countValueNambers('open');
+        $closeResult = $em->countValueNambers('close');
 
         $showTickets = new Tickets();
         $showTickets->setReOpen(20);
@@ -67,13 +48,16 @@ class MangerController extends AbstractController
             //'manager_name' => $userManeger->getUser()->getUsername(),
             'userManager' => $user->getLastName(),
             'showTickets' => $showTickets->getReOpen(),
-            'showTicketsClose' => $closedTickets,
-            'showTicketsOpen' => $openTickets,
-            'userID' => 2,
+            'showTicketsClose' => $openResult,
+            'showTicketsOpen' => $closeResult,
+            'reopnTicket'=>$allTickets,
+            'i'=>0
 
         ]);
 
     }
+
+
 
     /**
      * @Route("/manger/TicketList", name="ticketlist")
@@ -91,6 +75,8 @@ class MangerController extends AbstractController
     public function TicketDetailes (Tickets $ticket){
 
         /** @var Tickets $thisTickets */
+
+
 //        $thisTickets= $this->getDoctrine()->getRepository(Tickets::class)->findOneBy(['id' => $ticket]);
 
      //   $thisTickets= $this->getDoctrine()->getRepository(Tickets::class)->findOneBy(['assign_to']);
