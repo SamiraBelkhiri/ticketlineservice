@@ -19,8 +19,21 @@ class MangerController extends AbstractController
      */
     public function index()
     {
+        /** @var Users $user */
+        //$userEmail = $this->getUser()->getUsername();
 
-        $userEmail = $this->getUser()->getUsername();
+        $user = $this->getUser();
+        $user->getId();
+       // $user->getLastName();
+
+        /** @var Tickets $allTickets */
+
+        $allTickets->getTicketStatus();
+
+
+
+
+  /*      $userEmail = $this->getUser()->getId();
 
         $openTickets= $this->getDoctrine()->getRepository(Tickets::class)->findBy(['ticketStatus' => 'open']);
         $openTickets = count($openTickets);
@@ -28,7 +41,7 @@ class MangerController extends AbstractController
         $closedTickets= $this->getDoctrine()->getRepository(Tickets::class)->findBy(['ticketStatus' => 'close']);
         $closedTickets = count($closedTickets);
 
-        $showTickets= $this->getDoctrine()->getRepository(Tickets::class)->findAll();
+        $showTickets= $this->getDoctrine()->getRepository(Tickets::class)->findAll();*/
 
        $open = 0;
         $close = 0;
@@ -52,7 +65,7 @@ class MangerController extends AbstractController
 
         return $this->render('manger/index.html.twig', [
             //'manager_name' => $userManeger->getUser()->getUsername(),
-            'userManager' => $userEmail,
+            'userManager' => $user->getLastName(),
             'showTickets' => $showTickets->getReOpen(),
             'showTicketsClose' => $closedTickets,
             'showTicketsOpen' => $openTickets,
@@ -67,17 +80,28 @@ class MangerController extends AbstractController
      */
     public function TicketList (){
 
-
         $tickets = $this->getDoctrine()->getRepository(Tickets::class)->findAll();
 
         return $this->render('manger/TicketList.html.twig', array('tickets' => $tickets));
     }
 
    /**
-     * @Route("/manger/AddAgent/{ticket}", name="ticketdetailes")
+     * @Route("/manger/TicketDetailes/{ticket}", name="ticketdetailes")
      */
     public function TicketDetailes (Tickets $ticket){
-        return $this->render('manger/AddAgent.html.twig', array('tickets' => $ticket));
+
+        /** @var Tickets $thisTickets */
+//        $thisTickets= $this->getDoctrine()->getRepository(Tickets::class)->findOneBy(['id' => $ticket]);
+
+     //   $thisTickets= $this->getDoctrine()->getRepository(Tickets::class)->findOneBy(['assign_to']);
+
+  //      $user = $thisTickets[0];
+
+        //$thisTickets->getAssignTo();
+
+    //    var_dump($thisTickets->getAssignTo());
+
+        return $this->render('manger/TicketDetailes.html.twig', ['ticket' => $ticket]);
     }
 
     /**
@@ -86,6 +110,7 @@ class MangerController extends AbstractController
     public function AddAgent (){
 
         $tickets = $this->getDoctrine()->getRepository(Tickets::class)->find();
+
 
         return $this->render('manger/AddAgent.html.twig', array('tickets' => $tickets));
     }
